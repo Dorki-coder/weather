@@ -13,35 +13,33 @@ function showLocation(position) {
   ).then((data) => getWeather(data));
 }
 
-function getWeatherByCity(city) {
-  fetch(
-    `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=d0e0d4111b038bf7a68122c261d1b93b`
-  )
-    .then((data) => getWeather(data))
-    .catch((err) => alert("error"));
+async function getWeatherByCity(city) {
+  try {
+    const response = await fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=d0e0d4111b038bf7a68122c261d1b93b`
+    );
+    if (response.status == 200) {
+      getWeather(response);
+    } else outError();
+  } catch {}
 }
 
 function getCityByIp() {
-  try {
-    fetch("https://api.ipify.org/?format=json")
-      .then((response) => response.json())
-      .then((data) => {
-        fetch(
-          `https://geo.ipify.org/api/v2/country,city?apiKey=at_cqYxBr2Cfby9lFHDwPEfmwJSro9sD&ipAddress=${data.ip}`
-        )
-          .then((data) => data.json())
-          .then((data) => getWeatherByCity(data.location.city));
-      });
-  } catch (err) {
-    alert("Error");
-    changeCity();
-  }
+  fetch("https://api.ipify.org/?format=json")
+    .then((response) => response.json())
+    .then((data) => {
+      fetch(
+        `https://geo.ipify.org/api/v2/country,city?apiKey=at_cqYxBr2Cfby9lFHDwPEfmwJSro9sD&ipAddress=${data.ip}`
+      )
+        .then((data) => data.json())
+        .then((data) => getWeatherByCity(data.location.city));
+    });
 }
 
 function weatherOut(object) {
   document.querySelector(".card").insertAdjacentHTML(
     "afterbegin",
-    `      <div class="temp"></div>
+    `<div class="temp"></div>
   <div class="city"></div>
   <div class="changeCity">Change city</div>   `
   );
@@ -63,8 +61,7 @@ function getWeather(data) {
       weatherOut({ name, temp, description });
     });
   } catch (err) {
-    alert("Error");
-    changeCity();
+    outError();
   }
 }
 
@@ -82,4 +79,15 @@ function find() {
   city = document.getElementById("input").value;
   document.querySelector(".card").innerText = "";
   getWeatherByCity(city);
+}
+
+function outError() {
+  document.querySelector(".card").innerText = "";
+  document.querySelector(".card").insertAdjacentHTML(
+    "afterbegin",
+    `
+    <div>Ooops. Something went wrong.</div>
+    <button onclick="changeCity ()">Try again  </button>
+    `
+  );
 }
