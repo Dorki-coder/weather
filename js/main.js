@@ -37,6 +37,7 @@ function getCityByIp() {
 }
 
 function weatherOut(object) {
+  document.querySelector(".card").innerText = "";
   document.querySelector(".card").insertAdjacentHTML(
     "afterbegin",
     `<div class="temp"></div>
