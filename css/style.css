@@ -1,0 +1,63 @@
+body {
+  display: flex;
+  justify-content: center;
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 36px;
+  text-align: center;
+  color: #ffff;
+  background: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%) fixed;
+}
+
+.card {
+  margin-top: 150px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: 20px;
+  background-color: rgba(161, 140, 209, 0.5);
+}
+
+.temp {
+  font-weight: 700;
+  font-size: 72px;
+  line-height: 87px;
+}
+
+.city {
+  font-size: 24px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.changeCity {
+  cursor: pointer;
+  font-style: italic;
+  font-size: 17px;
+  line-height: 28px;
+  text-decoration-line: underline;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+button {
+  margin-top: 26px;
+  font-size: 20px;
+  background: #ffffff;
+  border-radius: 8px;
+  border: none;
+  padding: 6px 50px 6px 50px;
+  color: #9b6afc;
+  cursor: pointer;
+}
+
+input {
+  margin-top: 20px;
+  font-size: 20px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+  outline: none;
+  background: none;
+  border: none;
+  border-bottom: 1px rgba(255, 255, 255, 0.75) solid;
+}
