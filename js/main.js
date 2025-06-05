@@ -53,14 +53,13 @@ function weatherOut(object) {
   document.querySelector(".changeCity").addEventListener("click", changeCity);
 }
 
-function getWeather(data) {
+async function getWeather(response) {
   try {
-    data = data.json().then((data) => {
-      const { name } = data;
-      const { temp } = data.main;
-      const { description } = data.weather[0];
-      weatherOut({ name, temp, description });
-    });
+    const data = await response.json();
+    const { name } = data;
+    const { temp } = data.main;
+    const { description } = data.weather[0];
+    weatherOut({ name, temp, description });
   } catch (err) {
     outError();
   }
